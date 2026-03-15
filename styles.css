@@ -293,9 +293,11 @@ body {
   line-height: 1;
 }
 
-.fmt-btn:hover {
-  background: var(--bg-hover);
-  color: var(--text-primary);
+@media (hover: hover) {
+  .fmt-btn:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+  }
 }
 
 .fmt-btn:active {
@@ -388,9 +390,11 @@ button {
   transition: all 150ms ease-out;
 }
 
-button:hover {
-  background: var(--bg-hover);
-  color: var(--text-primary);
+@media (hover: hover) {
+  button:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+  }
 }
 
 button:active {
