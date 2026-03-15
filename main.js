@@ -28,6 +28,7 @@ const newNoteBtn = document.getElementById("new-note-btn");
 const emptyNewBtn = document.getElementById("empty-new-btn");
 const toggleSidebarBtn = document.getElementById("toggle-sidebar-btn");
 const sidebar = document.getElementById("sidebar");
+const sidebarBackdrop = document.getElementById("sidebar-backdrop");
 const notesList = document.getElementById("notes-list");
 
 let notes = [];
@@ -110,6 +111,7 @@ function renderNotesList() {
       selectNote(note.id);
       if (window.innerWidth <= 600) {
         sidebar.classList.add("hidden");
+        sidebarBackdrop.classList.remove("active");
       }
     });
     notesList.appendChild(item);
@@ -229,8 +231,16 @@ function exportNote() {
 }
 
 function toggleSidebar() {
-  sidebar.classList.toggle("hidden");
+  const isHidden = sidebar.classList.toggle("hidden");
+  if (window.innerWidth <= 600) {
+    sidebarBackdrop.classList.toggle("active", !isHidden);
+  }
 }
+
+sidebarBackdrop.addEventListener("click", () => {
+  sidebar.classList.add("hidden");
+  sidebarBackdrop.classList.remove("active");
+});
 
 // ─── Event Listeners ───
 
