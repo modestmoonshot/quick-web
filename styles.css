@@ -265,111 +265,6 @@ body {
   background-color: #e85d4a;
 }
 
-/* ─── Format Bar ─── */
-#format-bar {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-}
-
-.fmt-btn {
-  background: transparent;
-  color: var(--text-tertiary);
-  border: none;
-  border-radius: 4px;
-  width: 28px;
-  height: 26px;
-  font-size: 14px;
-  font-weight: 400;
-  cursor: pointer;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
-               "Helvetica Neue", sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 150ms ease-out;
-  padding: 0;
-  letter-spacing: 0;
-  line-height: 1;
-}
-
-@media (hover: hover) {
-  .fmt-btn:hover {
-    background: var(--bg-hover);
-    color: var(--text-primary);
-  }
-}
-
-.fmt-btn:active {
-  transform: scale(0.93);
-}
-
-.fmt-btn.active {
-  background: var(--accent-subtle);
-  color: var(--accent);
-}
-
-#bold-btn {
-  font-weight: 700;
-}
-
-#italic-btn {
-  font-style: italic;
-}
-
-#underline-btn {
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-.fmt-divider {
-  width: 1px;
-  height: 16px;
-  background: var(--border-strong);
-  margin: 0 6px;
-  flex-shrink: 0;
-}
-
-#font-size-control {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  background: var(--bg-elevated);
-  border-radius: 5px;
-  border: 1px solid var(--border-strong);
-  overflow: hidden;
-}
-
-.size-btn {
-  width: 24px;
-  height: 24px;
-  font-size: 14px;
-  border-radius: 0;
-  color: var(--text-secondary);
-  font-weight: 300;
-}
-
-.size-btn:hover {
-  background: var(--bg-hover);
-  color: var(--text-primary);
-  border-radius: 0;
-}
-
-#font-size-display {
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  min-width: 26px;
-  text-align: center;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.02em;
-  border-left: 1px solid var(--border-strong);
-  border-right: 1px solid var(--border-strong);
-  height: 24px;
-  line-height: 24px;
-  cursor: default;
-}
-
 #buttons {
   display: flex;
   gap: 4px;
@@ -477,7 +372,6 @@ body.no-notes #editor { display: none; }
 body.no-notes #empty-state { display: flex; }
 body.no-notes #delete-btn { display: none; }
 body.no-notes #export-btn { display: none; }
-body.no-notes #format-bar { display: none; }
 
 /* ─── Mobile ─── */
 @media (max-width: 600px) {
@@ -503,10 +397,6 @@ body.no-notes #format-bar { display: none; }
     gap: 4px;
   }
 
-  .fmt-divider {
-    margin: 0 3px;
-  }
-
   #buttons {
     gap: 2px;
   }
@@ -516,19 +406,4 @@ body.no-notes #format-bar { display: none; }
     font-size: 11px;
   }
 
-  .fmt-btn {
-    width: 32px;
-    height: 32px;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  .size-btn {
-    width: 28px;
-    height: 28px;
-  }
-
-  #font-size-display {
-    height: 28px;
-    line-height: 28px;
-  }
 }
