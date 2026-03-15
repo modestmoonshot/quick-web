@@ -304,8 +304,28 @@ function updateFormatState() {
   fontSizeDisplay.textContent = getCurrentFontSize();
 }
 
+let savedRange = null;
+
+function saveSelection() {
+  const sel = window.getSelection();
+  if (sel.rangeCount > 0 && editor.contains(sel.anchorNode)) {
+    savedRange = sel.getRangeAt(0).cloneRange();
+  }
+}
+
+function restoreSelection() {
+  if (savedRange) {
+    editor.focus();
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(savedRange);
+  } else {
+    editor.focus();
+  }
+}
+
 function applyFormat(action) {
-  editor.focus();
+  restoreSelection();
 
   if (action === "underline") {
     const wasUnderline = checkUnderlineFromDOM();
@@ -390,27 +410,59 @@ editor.addEventListener("input", () => {
 });
 editor.addEventListener("focus", updateFormatState);
 
+// Save selection whenever it changes in the editor
+editor.addEventListener("keyup", saveSelection);
+editor.addEventListener("mouseup", saveSelection);
+document.addEventListener("selectionchange", () => {
+  const sel = window.getSelection();
+  if (sel.rangeCount > 0 && editor.contains(sel.anchorNode)) {
+    saveSelection();
+  }
+});
+
 function preventFocusSteal(e) {
   e.preventDefault();
 }
 
+// Desktop: prevent focus steal on mousedown
 boldBtn.addEventListener("mousedown", preventFocusSteal);
 italicBtn.addEventListener("mousedown", preventFocusSteal);
 underlineBtn.addEventListener("mousedown", preventFocusSteal);
 sizeUpBtn.addEventListener("mousedown", preventFocusSteal);
 sizeDownBtn.addEventListener("mousedown", preventFocusSteal);
 
-boldBtn.addEventListener("touchstart", preventFocusSteal);
-italicBtn.addEventListener("touchstart", preventFocusSteal);
-underlineBtn.addEventListener("touchstart", preventFocusSteal);
-sizeUpBtn.addEventListener("touchstart", preventFocusSteal);
-sizeDownBtn.addEventListener("touchstart", preventFocusSteal);
+// Mobile: handle format on touchend (touchstart preventDefault would block click)
+let handledByTouch = false;
 
-boldBtn.addEventListener("click", () => applyFormat("bold"));
-italicBtn.addEventListener("click", () => applyFormat("italic"));
-underlineBtn.addEventListener("click", () => applyFormat("underline"));
-sizeUpBtn.addEventListener("click", () => applyFormat("bigger"));
-sizeDownBtn.addEventListener("click", () => applyFormat("smaller"));
+function mobileFmt(action) {
+  return function(e) {
+    e.preventDefault();
+    handledByTouch = true;
+    applyFormat(action);
+  };
+}
+
+function clickFmt(action) {
+  return function() {
+    if (handledByTouch) {
+      handledByTouch = false;
+      return;
+    }
+    applyFormat(action);
+  };
+}
+
+boldBtn.addEventListener("touchend", mobileFmt("bold"));
+italicBtn.addEventListener("touchend", mobileFmt("italic"));
+underlineBtn.addEventListener("touchend", mobileFmt("underline"));
+sizeUpBtn.addEventListener("touchend", mobileFmt("bigger"));
+sizeDownBtn.addEventListener("touchend", mobileFmt("smaller"));
+
+boldBtn.addEventListener("click", clickFmt("bold"));
+italicBtn.addEventListener("click", clickFmt("italic"));
+underlineBtn.addEventListener("click", clickFmt("underline"));
+sizeUpBtn.addEventListener("click", clickFmt("bigger"));
+sizeDownBtn.addEventListener("click", clickFmt("smaller"));
 
 editor.addEventListener("keydown", (e) => {
   if (e.key === "Tab") {
