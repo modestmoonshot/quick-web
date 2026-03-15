@@ -400,6 +400,12 @@ underlineBtn.addEventListener("mousedown", preventFocusSteal);
 sizeUpBtn.addEventListener("mousedown", preventFocusSteal);
 sizeDownBtn.addEventListener("mousedown", preventFocusSteal);
 
+boldBtn.addEventListener("touchstart", preventFocusSteal);
+italicBtn.addEventListener("touchstart", preventFocusSteal);
+underlineBtn.addEventListener("touchstart", preventFocusSteal);
+sizeUpBtn.addEventListener("touchstart", preventFocusSteal);
+sizeDownBtn.addEventListener("touchstart", preventFocusSteal);
+
 boldBtn.addEventListener("click", () => applyFormat("bold"));
 italicBtn.addEventListener("click", () => applyFormat("italic"));
 underlineBtn.addEventListener("click", () => applyFormat("underline"));
