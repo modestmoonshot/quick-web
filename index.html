@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <link rel="manifest" href="manifest.json" />
+    <title>Quick</title>
+    <script src="main.js" defer></script>
+  </head>
+  <body>
+    <div id="sidebar">
+      <div id="sidebar-header">
+        <button id="new-note-btn" title="New Note">+ New Note</button>
+      </div>
+      <div id="notes-list"></div>
+    </div>
+    <div id="main">
+      <div id="toolbar">
+        <div id="toolbar-left">
+          <button id="toggle-sidebar-btn" title="Toggle Sidebar">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <rect x="1" y="1" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.2"/>
+              <line x1="5.5" y1="1" x2="5.5" y2="15" stroke="currentColor" stroke-width="1.2"/>
+            </svg>
+          </button>
+          <span id="status-dot" title="Saved"></span>
+        </div>
+        <div id="format-bar">
+          <button id="bold-btn" class="fmt-btn" title="Bold">B</button>
+          <button id="italic-btn" class="fmt-btn" title="Italic">I</button>
+          <button id="underline-btn" class="fmt-btn" title="Underline">U</button>
+          <div class="fmt-divider"></div>
+          <div id="font-size-control">
+            <button id="size-down-btn" class="fmt-btn size-btn" title="Smaller">−</button>
+            <span id="font-size-display">14</span>
+            <button id="size-up-btn" class="fmt-btn size-btn" title="Bigger">+</button>
+          </div>
+        </div>
+        <div id="buttons">
+          <button id="delete-btn" title="Delete Note">Delete</button>
+          <button id="export-btn" title="Export">Export</button>
+        </div>
+      </div>
+      <div id="editor" contenteditable="true" spellcheck="true" data-placeholder="Start typing..."></div>
+      <div id="empty-state">
+        <p>No notes yet</p>
+        <button id="empty-new-btn">+ New Note</button>
+      </div>
+    </div>
+  </body>
+</html>
